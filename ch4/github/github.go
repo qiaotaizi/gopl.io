@@ -10,32 +10,27 @@ import (
 )
 
 //通过json解析一个http请求的json返回值
-
-func main() {
-
-}
-
-func SearchIssues(terms []string)(*IssuesSearchResult,error){
-	q:=url.QueryEscape(strings.Join(terms," "))
-	resp,err:=http.Get(IssuesURL+"?q="+q)
-	if err!=nil{
-		return nil,err
+func SearchIssues(terms []string) (*IssuesSearchResult, error) {
+	q := url.QueryEscape(strings.Join(terms, " "))
+	resp, err := http.Get(IssuesURL + "?q=" + q)
+	if err != nil {
+		return nil, err
 	}
 
-	if resp.StatusCode!=http.StatusOK{
-		return nil,fmt.Errorf("search query failed %s",resp.Status)
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("search query failed %s", resp.Status)
 	}
 
 	var result IssuesSearchResult
 	//这里反序列化为什么使用NewDecoder.Decode呢?
 	//因为要从流中读取json串
 	//而Unmarshal要从现成的字符串反序列化
-	if err:=json.NewDecoder(resp.Body).Decode(&result);err!=nil{
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		resp.Body.Close()
-		return nil,err
+		return nil, err
 	}
 	resp.Body.Close()
-	return &result,nil
+	return &result, nil
 
 }
 
