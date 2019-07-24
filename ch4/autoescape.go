@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-const testTempl=`<p>A: {{.A}}</p>
+const testTempl= `<p>A: {{.A}}</p>
 <p>B: {{.B}}</p>`
 
 func main() {
@@ -23,5 +23,3 @@ func main() {
 	}
 	
 }
-
-
