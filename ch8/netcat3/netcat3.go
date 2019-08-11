@@ -12,8 +12,15 @@ func main() {
 	if err!=nil{
 		log.Fatal(err)
 	}
-	defer conn.Close()
-	mustCopy(os.Stdout,conn)
+	done:=make(chan bool)
+	go func(){
+		io.Copy(os.Stdout,conn)
+		log.Println("done")
+		done<-true
+	}()
+	mustCopy(conn,os.Stdin)
+	conn.Close()
+	<-done
 }
 
 func mustCopy(dst io.Writer,src io.Reader){
@@ -21,3 +28,5 @@ func mustCopy(dst io.Writer,src io.Reader){
 		log.Fatal(err)
 	}
 }
+
+
