@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"net"
 )
 
@@ -14,6 +15,7 @@ func handleConn(conn net.Conn){
 	go clientWriter(conn,ch)
 
 	who:=conn.RemoteAddr().String()
+	log.Printf("已受理来自%s的连接请求\n",who)
 	ch<-"You are "+who
 	messages<-who+" has arrived"
 	entering<-ch
@@ -26,10 +28,11 @@ func handleConn(conn net.Conn){
 	leaving<-ch
 	messages<-who+" has left"
 	conn.Close()
+	log.Printf("已断开来自%s的连接请求\n",who)
 }
 
 func clientWriter(conn net.Conn,ch <-chan string){
-	for msg:=range messages{
+	for msg:=range ch{
 		fmt.Fprintln(conn,msg)//不断从messages中读取消息并发送给客户端
 	}
 }

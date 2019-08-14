@@ -12,6 +12,7 @@ func main() {
 	if err!=nil{
 		log.Fatal(err)
 	}
+	log.Println("服务器启动")
 	go broadcaster()
 	for{
 		conn,err:=listener.Accept()
