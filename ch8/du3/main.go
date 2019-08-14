@@ -3,10 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
+	"sync"
 	"time"
 )
 
 var verbose = flag.Bool("v", false, "show verbose progress messages")
+
+//这个版本的du
+//允许并发遍历多个目录
+//但是限制最高并发遍历的目录数量
 
 func main() {
 	defer func() func() {
@@ -22,12 +27,17 @@ func main() {
 		roots = []string{"."} //无参数时,根目录指向当前目录
 	}
 	fileSizes := make(chan int64)
-	go func() { //副routing,遍历目录,将每个文件的结果发送给channel,由主线程进行读取并累加
-		for _, root := range roots {
-			walkDir(root, fileSizes)
-		}
+	var n sync.WaitGroup //额外开启一个线程,等待所有目录遍历完成,关闭fileSizes channel
+	for _, root := range roots {
+		n.Add(1) //遍历参数目录,n+1
+		go walkDir(root, &n, fileSizes)//开启线程遍历目录
+	}
+
+	go func() {
+		n.Wait()
 		close(fileSizes)
 	}()
+
 	var tick <-chan time.Time
 	if *verbose {
 		tick = time.Tick(500 * time.Millisecond)
@@ -46,13 +56,13 @@ loop:
 			}
 			nfiles++
 			nbyte += size
-		case <-tick:
+		case <-tick://如果verbose为false,tick为nil,select不会选择这个case
 			//每当计时器跳数,输出一次目录信息
 			printDiskUsage(nfiles, nbyte)
 		}
 
 	}
-	printDiskUsage(nfiles, nbyte)//打印总量
+	printDiskUsage(nfiles, nbyte) //打印总量
 }
 
 //输出磁盘用量
