@@ -49,7 +49,8 @@ func TestMemo1(t *testing.T){
 		//  testing.tRunner()
 		//      C:/Go/src/testing/testing.go:827 +0x169
 		//==================
-		//可以看到
+		//可以看到出现了两对数据竞争
+		//说明有两个goroutine在没有同步干预的情况下更新了cache map
 	}
 }
 
