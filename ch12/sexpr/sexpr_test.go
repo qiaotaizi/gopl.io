@@ -1,11 +1,14 @@
 package sexpr
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 type Movie struct {
 	Title, Subtitle string
 	Year            int
-	Color           bool
+	//Color           bool
 	Actor           map[string]string
 	Oscars          []string
 	Sequel          *string
@@ -15,7 +18,7 @@ var strangelove = Movie{
 	Title:    "Dr. Strangelove",
 	Subtitle: "How I Learned to Stop Worrying and Love the Bomb",
 	Year:     1964,
-	Color:    false,
+	//Color:    false,
 	Actor: map[string]string{
 		"Dr. Strangelove":            "Peter Sellers",
 		"Grp. Capt. Lionel Mandrake": "Peter Sellers",
@@ -38,5 +41,19 @@ func TestMarshal(t *testing.T) {
 		t.Errorf("Marshal: %v\n",err)
 	}
 	t.Log(string(bs))
+}
+
+func TestUnmarshal(t *testing.T) {
+	bs,err:=Marshal(strangelove)
+	if err!=nil{
+		t.Errorf("Marshal: %v\n",err)
+		return
+	}
+	var movie Movie
+	if err=Unmarshal(bs,movie);err!=nil{
+		t.Errorf("Unmarshal %v\n",err)
+		return
+	}
+	fmt.Println(movie.Oscars)
 }
 
