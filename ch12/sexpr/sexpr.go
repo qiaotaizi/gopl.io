@@ -17,11 +17,20 @@ func encode(buf *bytes.Buffer,v reflect.Value) error{
 	case reflect.Uint,reflect.Uint8,reflect.Uint16,reflect.Uint32,reflect.Uint64,reflect.Uintptr:
 		fmt.Fprintf(buf,"%d",v.Uint())
 
+	case reflect.Bool:
+		var r rune
+		if v.Bool(){
+			r='t'
+		}else{
+			r='f'
+		}
+		fmt.Fprintf(buf,"%c",r)
+
 	case reflect.String:
 		fmt.Fprintf(buf,"%s",v.String())
 
 	case reflect.Ptr:
-		encode(buf,v.Elem())
+		encode(buf,v.Elem())//获取指针指向的数据,进行递归encode
 
 	case reflect.Array,reflect.Slice:
 		buf.WriteByte('(')
@@ -69,4 +78,12 @@ func encode(buf *bytes.Buffer,v reflect.Value) error{
 		return fmt.Errorf("unsupport type %s",v.Type())
 	}
 	return nil
+}
+
+func Marshal(v interface{})([]byte,error){
+	var buf bytes.Buffer
+	if err:=encode(&buf,reflect.ValueOf(v));err!=nil{
+		return nil,err
+	}
+	return buf.Bytes(),nil
 }
