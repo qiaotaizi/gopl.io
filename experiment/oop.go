@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gopl.io/ch6/geometry"
+	"github.com/qiaotaizi/gopl.io/ch6/geometry"
 )
 
 func main() {

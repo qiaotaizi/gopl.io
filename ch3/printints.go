@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gopl.io/ch3/printints"
+	"github.com/qiaotaizi/gopl.io/ch3/printints"
 )
 
 func main() {

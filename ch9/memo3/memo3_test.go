@@ -2,7 +2,7 @@ package memo3
 
 import (
 	"fmt"
-	"gopl.io/ch9/httpgetbody"
+	"github.com/qiaotaizi/gopl.io/ch9/httpgetbody"
 	"sync"
 	"testing"
 	"time"

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gopl.io/ch3/comma"
+	"github.com/qiaotaizi/gopl.io/ch3/comma"
 )
 
 func main(){

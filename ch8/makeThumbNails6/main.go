@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gopl.io/thumbnail"
+	"github.com/qiaotaizi/gopl.io/thumbnail"
 	"log"
 	"os"
 	"sync"

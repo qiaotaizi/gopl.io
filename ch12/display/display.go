@@ -2,7 +2,7 @@ package display
 
 import (
 	"fmt"
-	"gopl.io/ch12/format"
+	"github.com/qiaotaizi/gopl.io/ch12/format"
 	"reflect"
 )
 

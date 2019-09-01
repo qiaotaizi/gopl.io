@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gopl.io/ch2/tempconv"
+	"github.com/qiaotaizi/gopl.io/ch2/tempconv"
 	"os"
 	"strconv"
 )

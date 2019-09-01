@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"golang.org/x/net/html"
-	"gopl.io/ch5/visit"
+	"github.com/qiaotaizi/gopl.io/ch5/visit"
 	"net/http"
 	"os"
 )

@@ -2,7 +2,7 @@ package memo1
 
 import (
 	"fmt"
-	"gopl.io/ch9/httpgetbody"
+	"github.com/qiaotaizi/gopl.io/ch9/httpgetbody"
 	"testing"
 	"time"
 )

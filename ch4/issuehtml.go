@@ -5,7 +5,7 @@ package main
 //会将html中的特殊字符进行转义处理
 
 import (
-	"gopl.io/ch4/github"
+	"github.com/qiaotaizi/gopl.io/ch4/github"
 	"html/template"
 	"log"
 	"os"

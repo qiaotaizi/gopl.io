@@ -2,7 +2,7 @@ package search
 
 import (
 	"fmt"
-	params "gopl.io/ch12/param"
+	params "github.com/qiaotaizi/gopl.io/ch12/param"
 	"net/http"
 )
 

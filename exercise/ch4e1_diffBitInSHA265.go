@@ -3,7 +3,7 @@ package main
 import (
 	"crypto/sha256"
 	"fmt"
-	"gopl.io/ch2/popcount"
+	"github.com/qiaotaizi/gopl.io/ch2/popcount"
 )
 
 //练习 4.1： 编写一个函数，计算两个SHA256哈希码中不同bit的数目。（参考2.6.2节的

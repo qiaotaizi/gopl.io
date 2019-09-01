@@ -1,7 +1,7 @@
 package main
 //注意这里导入的是text/template
 import (
-	"gopl.io/ch4/github"
+	"github.com/qiaotaizi/gopl.io/ch4/github"
 	"log"
 	"os"
 	"text/template"
